@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-[#101012] text-white;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  @keyframes gradient-x {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+  
+  @keyframes slide-up {
+    0% {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fade-in-delay {
+    0%, 50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes shake {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-5px);
+    }
+    75% {
+      transform: translateX(5px);
+    }
+  }
+  
+  .animate-gradient-x {
+    animation: gradient-x 15s linear infinite;
+    background-size: 200% 200%;
+  }
+  
+  .animate-slide-up {
+    animation: slide-up 0.5s ease-out forwards;
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out forwards;
+  }
+  
+  .animate-fade-in-delay {
+    animation: fade-in-delay 1s ease-out forwards;
+  }
+  
+  .animate-shake {
+    animation: shake 0.5s ease-in-out;
+  }
+}
+
+/* TipTap Editor Styles */
+.ProseMirror {
+  @apply text-gray-300;
+}
+
+.ProseMirror:focus {
+  @apply outline-none;
+}
+
+.ProseMirror h1 {
+  @apply text-3xl font-bold mb-4 text-white;
+}
+
+.ProseMirror h2 {
+  @apply text-2xl font-bold mb-3 text-white;
+}
+
+.ProseMirror p {
+  @apply mb-4;
+}
+
+.ProseMirror ul {
+  @apply list-disc pl-6 mb-4;
+}
+
+.ProseMirror ol {
+  @apply list-decimal pl-6 mb-4;
+}
+
+.ProseMirror blockquote {
+  @apply border-l-4 border-[#3c7dc3] pl-4 italic my-4;
+}
+
+.ProseMirror code {
+  @apply bg-[#2a2a2c] px-2 py-1 rounded font-mono text-sm;
+}
+
+.ProseMirror pre {
+  @apply bg-[#2a2a2c] p-4 rounded-lg my-4 font-mono text-sm overflow-x-auto;
+}
+
+.ProseMirror a {
+  @apply text-[#3c7dc3] hover:text-[#2c5a9a] transition-colors;
+}

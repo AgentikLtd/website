@@ -1,0 +1,47 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Blog posts collection rules
+    match /blog_posts/{document} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    
+    // Newsletter subscriptions collection rules
+    match /newsletter_subscriptions/{document} {
+      allow read: if true;
+      allow create: if request.resource.data.keys().hasAll(['email', 'subscribedAt', 'status']) 
+                   && request.resource.data.email is string
+                   && request.resource.data.status == 'active';
+      allow update: if request.resource.data.keys().hasAll(['status'])
+                   && (request.resource.data.status == 'active' 
+                       || request.resource.data.status == 'unsubscribed');
+    }
+    
+    // Contact form submissions collection rules
+    match /contact_submissions/{document} {
+      allow create: if request.resource.data.keys().hasAll(['email', 'createdAt', 'status'])
+                   && request.resource.data.email is string
+                   && request.resource.data.status == 'new';
+      allow read: if request.auth != null;
+    }
+
+    // Banner management rules
+    match /banners/{document} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    
+    // Ebook downloads collection rules
+    match /ebook_downloads/{document} {
+      allow read: if request.auth != null;
+      allow create: if request.resource.data.keys().hasAll(['email', 'downloadedAt', 'isBannerSubmission'])
+                   && request.resource.data.email is string;
+    }
+    
+    // Default deny all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
